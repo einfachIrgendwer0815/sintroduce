@@ -1,0 +1,34 @@
+{
+  "name": "sintroduce",
+  "version": "0.1.0",
+  "description": "Sintroduce is a javascript libaray for creating presentations with web-dev languages (i.e. html, css, js, ...)",
+  "main": "",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/einfachIrgendwer0815/sintroduce.git"
+  },
+  "keywords": [
+    "presentation",
+    "web-presentation"
+  ],
+  "author": "Moritz Bauer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/einfachIrgendwer0815/sintroduce/issues"
+  },
+  "homepage": "https://github.com/einfachIrgendwer0815/sintroduce#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "qunit": "^2.18.1",
+    "sass": "^1.50.0",
+    "typescript": "^4.6.3"
+  }
+}
