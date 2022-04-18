@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>General Test</title>
+
+    <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
+
+    <script src="../dist/sintroduce.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script src="../node_modules/qunit/qunit/qunit.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+        QUnit.module('PreInit', () => {
+          QUnit.test('isReady', assert => {
+            assert.equal(Sintroduce.getIsReady(), false);
+          });
+        });
+    </script>
+  </body>
+</html>
