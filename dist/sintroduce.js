@@ -1,0 +1,2 @@
+!function(e,n){"object"==typeof exports&&"undefined"!=typeof module?module.exports=n():"function"==typeof define&&define.amd?define(n):(e="undefined"!=typeof globalThis?globalThis:e||self).Sintroduce=n()}(this,(function(){"use strict";var e=function(){function e(){this.isReady=!1}return e.prototype.getIsReady=function(){return this.isReady},e}(),n=new e;return n.VERSION="0.1.0",n.AUTHOR="einfachIrgendwer0815",n.LICENSE="MIT",n}));
+//# sourceMappingURL=sintroduce.js.map
