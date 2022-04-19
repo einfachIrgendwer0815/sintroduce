@@ -1,5 +1,4 @@
 import { Theme as PresentationTheme } from './static/presentationThemes';
-import { Theme as CssTheme } from './static/cssThemes';
 
 export interface Options {
   /* behaviour-related options */
@@ -21,7 +20,6 @@ export interface Options {
   /* style-related options */
 
   presentationTheme: PresentationTheme;
-  cssTheme: CssTheme;
 }
 
 export const DefaultOptions: Options = {
@@ -44,7 +42,6 @@ export const DefaultOptions: Options = {
   /* style-related options */
 
   presentationTheme: PresentationTheme.SimpleSlideshow,
-  cssTheme: CssTheme.StandardDark,
 }
 
 export function processOptions(options: { [ key: string ]: any }): Options {
