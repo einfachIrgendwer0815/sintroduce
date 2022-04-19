@@ -15,10 +15,22 @@
     <script src="../node_modules/qunit/qunit/qunit.js" charset="utf-8"></script>
 
     <script type="text/javascript">
-        QUnit.module('PreInit', () => {
-          QUnit.test('isReady', assert => {
+        QUnit.module('Overall test', () => {
+          QUnit.test('PreInitState', (assert) => {
             assert.equal(Sintroduce.getIsReady(), false);
+            assert.equal(Sintroduce.getHasStarted(), false);
+            assert.equal(Sintroduce.getPaused(), false);
           });
+
+          var options = {
+            autoStart: false
+          };
+
+          QUnit.test('InitOptions', (assert) => {
+            Sintroduce.initialize(options);
+
+            assert.equal(Sintroduce.getOption("autoStart"), false);
+          })
         });
     </script>
   </body>
