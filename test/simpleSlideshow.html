@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>General Test</title>
+
+    <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
+
+    <script src="../dist/sintroduce.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="sintroduce-container" style="visibility: hidden;">
+      <section>
+        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
+      </section>
+      <section>
+        <span class="fragment">These</span>
+        <span class="fragment">are</span>
+        <span class="fragment">some</span>
+        <span class="fragment">fragments.</span>
+      </section>
+      <section>
+        <p>some fancy text</p>
+        <span class="fragment">And another fragment</span>
+      </section>
+    </div>
+
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+
+    <script src="../node_modules/qunit/qunit/qunit.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      QUnit.module('SimpleSlideshow');
+
+      QUnit.test('initialize', (assert) => {
+        var content = document.getElementById("sintroduce-container").children;
+
+        Sintroduce.initialize({
+          presentationTheme: "SimpleSlideshow",
+          autoStart: false,
+        });
+
+        var viewportElement = document.getElementById("sintroduce-viewport");
+
+        assert.notEqual(viewportElement, null);
+
+        Array.from(content).forEach((item, i) => {
+          assert.equal(item.parentElement, viewportElement);
+        });
+
+        assert.equal(document.getElementById("sintroduce-container"), null);
+
+        assert.equal(Sintroduce.getIsReady(), true);
+      });
+    </script>
+  </body>
+</html>

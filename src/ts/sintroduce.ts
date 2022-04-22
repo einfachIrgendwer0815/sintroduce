@@ -1,4 +1,6 @@
 import { Options, processOptions } from './lib/options';
+import ITheme from './lib/themes/theme';
+import { Theme as ThemeEnum, ThemeClasses } from './lib/static/presentationThemes';
 
 export default class Sintroduce {
   public VERSION: string;
@@ -11,10 +13,32 @@ export default class Sintroduce {
 
   private options: Options;
 
+  private theme: ITheme;
+
   constructor() { }
 
   public initialize(options: { [key: string]: any }): void {
     this.options = processOptions(options);
+
+    if (!this.checkForContainer()) return;
+
+    /* if given presentation theme is invalid (does not exist) */
+    if(ThemeEnum[this.options.presentationTheme] == undefined) {
+      console.error(`'${this.options.presentationTheme}' is not a valid presentationTheme.`);
+      return;
+    }
+
+    /* create theme instance */
+    this.theme = new ThemeClasses[this.options.presentationTheme]();
+
+    this.theme.setupViewport(document.body);
+
+    this.theme.copyContent(document.getElementById("sintroduce-container"));
+    this.isReady = true;
+  }
+
+  private checkForContainer(): boolean {
+    return document.getElementById("sintroduce-container") != undefined;
   }
 
   public getIsReady(): boolean {
