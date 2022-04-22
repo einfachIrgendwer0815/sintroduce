@@ -4,6 +4,7 @@ const sass = require('gulp-sass')(require('sass'));
 const rollup = require('rollup');
 const rollupTypescript = require('@rollup/plugin-typescript');
 const { terser } = require('rollup-plugin-terser');
+const stripBanner = require('rollup-plugin-strip-banner');
 
 const scssFiles = 'src/scss/**/*.scss';
 const cssDest = 'dist/css/';
@@ -14,6 +15,12 @@ const jsDest = {
 };
 
 const bundleName = "Sintroduce";
+
+const banner = `/*!
+* MIT licensed
+*
+* Copyright (C) 2022 einfachIrgendwer0815
+*/\n`
 
 gulp.task('scss', function (done) {
 	gulp.src(scssFiles)
@@ -27,7 +34,10 @@ gulp.task('js-es5', function (done) {
 	return rollup
     .rollup({
       input: tsSource,
-      plugins: [rollupTypescript()]
+      plugins: [
+				rollupTypescript({ compilerOptions: { target: 'es5' }}),
+				stripBanner(),
+			]
     })
     .then(bundle => {
       return bundle.write({
@@ -37,7 +47,8 @@ gulp.task('js-es5', function (done) {
 				plugins: [
 					terser()
 				],
-        sourcemap: true
+        sourcemap: true,
+				banner: banner
       });
     });
 });
@@ -46,7 +57,10 @@ gulp.task('js-es6', function (done) {
 	return rollup
     .rollup({
       input: tsSource,
-      plugins: [rollupTypescript()]
+      plugins: [
+				stripBanner(),
+				rollupTypescript({ compilerOptions: { target: 'es6' }})
+			]
     })
     .then(bundle => {
       return bundle.write({
@@ -56,7 +70,8 @@ gulp.task('js-es6', function (done) {
 				plugins: [
 					terser()
 				],
-        sourcemap: true
+        sourcemap: true,
+				banner: banner
       });
     });
 });
