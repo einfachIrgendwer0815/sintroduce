@@ -31,27 +31,26 @@
     <script src="../node_modules/qunit/qunit/qunit.js" charset="utf-8"></script>
 
     <script type="text/javascript">
+
+      var content = Array.from(document.getElementById("sintroduce-container").children);
+
+      Sintroduce.initialize({
+        presentationTheme: "SimpleSlideshow",
+        autoStart: false,
+      });
       QUnit.module('SimpleSlideshow');
 
-      QUnit.test('initialize', (assert) => {
-        var content = document.getElementById("sintroduce-container").children;
-
-        Sintroduce.initialize({
-          presentationTheme: "SimpleSlideshow",
-          autoStart: false,
-        });
-
+      QUnit.test('viewport', (assert) => {
         var viewportElement = document.getElementById("sintroduce-viewport");
+        assert.notEqual(viewportElement, null, 'viewport is set up');
 
-        assert.notEqual(viewportElement, null);
+      });
 
-        Array.from(content).forEach((item, i) => {
-          assert.equal(item.parentElement, viewportElement);
+      QUnit.test('sections moved', (assert) => {
+        var viewportElement = document.getElementById("sintroduce-viewport");
+        content.forEach((item, i) => {
+          assert.equal(item.parentElement, viewportElement, `sucessfully moved child at index ${i}`);
         });
-
-        assert.equal(document.getElementById("sintroduce-container"), null);
-
-        assert.equal(Sintroduce.getIsReady(), true);
       });
     </script>
   </body>
