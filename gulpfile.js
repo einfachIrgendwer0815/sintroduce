@@ -1,4 +1,7 @@
 const gulp = require('gulp');
+const yargs = require('yargs');
+const argv = yargs.argv;
+
 const sass = require('gulp-sass')(require('sass'));
 
 const rollup = require('rollup');
@@ -9,9 +12,12 @@ const stripBanner = require('rollup-plugin-strip-banner');
 const scssFiles = 'src/scss/**/*.scss';
 const cssDest = 'dist/css/';
 const tsSource = 'src/ts/index.ts';
+const tsDevSource = 'src/ts/index.dev.ts';
 const jsDest = {
 	'js-es5': './dist/sintroduce.js',
-	'js-es6': './dist/sintroduce.esm.js'
+	'js-es5-dev': './dist/sintroduce.dev.js',
+	'js-es6': './dist/sintroduce.esm.js',
+	'js-es6-dev': './dist/sintroduce.esm.dev.js'
 };
 
 const bundleName = "Sintroduce";
@@ -33,7 +39,7 @@ gulp.task('scss', function (done) {
 gulp.task('js-es5', function (done) {
 	return rollup
     .rollup({
-      input: tsSource,
+      input: argv.dev ? tsDevSource: tsSource,
       plugins: [
 				rollupTypescript({ compilerOptions: { target: 'es5' }}),
 				stripBanner(),
@@ -41,7 +47,7 @@ gulp.task('js-es5', function (done) {
     })
     .then(bundle => {
       return bundle.write({
-        file: jsDest["js-es5"],
+        file: argv.dev ? jsDest["js-es5-dev"]: jsDest["js-es5"],
         format: 'umd',
         name: bundleName,
 				plugins: [
@@ -56,7 +62,7 @@ gulp.task('js-es5', function (done) {
 gulp.task('js-es6', function (done) {
 	return rollup
     .rollup({
-      input: tsSource,
+      input: argv.dev ? tsDevSource: tsSource,
       plugins: [
 				stripBanner(),
 				rollupTypescript({ compilerOptions: { target: 'es6' }})
@@ -64,7 +70,7 @@ gulp.task('js-es6', function (done) {
     })
     .then(bundle => {
       return bundle.write({
-        file: jsDest["js-es6"],
+        file: argv.dev ? jsDest["js-es6-dev"]: jsDest["js-es6"],
         format: 'es',
         name: bundleName,
 				plugins: [
