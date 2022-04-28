@@ -1,17 +1,14 @@
 import ITheme from './theme';
 import StepByStepMapper from '../mapper/stepByStepMapper';
 
-export default class SimpleSlideshow implements ITheme {
-  private map: Array<Array<Element>>;
-  private position: number[];
+import IMapper from '../mapper/mapper';
 
+export default class SimpleSlideshow implements ITheme {
   private viewport: HTMLElement;
 
   public initialize(parentElement: HTMLElement, contentContainer: HTMLElement): void {
     this.setupViewport(parentElement);
     this.copyContent(contentContainer);
-
-    this.map = (new StepByStepMapper()).map(this.viewport);
   }
 
   /* add viewport elements to the DOM */
@@ -30,19 +27,11 @@ export default class SimpleSlideshow implements ITheme {
     contentContainer.remove();
   }
 
-  public getPosition(): number[] {
-    return this.position;
+  public getViewport(): HTMLElement {
+    return this.viewport;
   }
 
-  public jumpTo(position: number[]): void {
-
-  }
-
-  public jumpToHashLocPosition(): void {
-
-  }
-
-  public setHashLoc(): void {
-
+  public getMapper(): IMapper {
+    return new StepByStepMapper();
   }
 }

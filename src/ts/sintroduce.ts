@@ -1,6 +1,7 @@
 import { Options, processOptions } from './lib/options';
 import ITheme from './lib/themes/theme';
 import { Theme as ThemeEnum, ThemeClasses } from './lib/static/presentationThemes';
+import Navigator from './lib/navigator';
 
 export default class Sintroduce {
   public VERSION: string;
@@ -14,6 +15,7 @@ export default class Sintroduce {
   private options: Options;
 
   private theme: ITheme;
+  private navigator: Navigator;
 
   constructor() { }
 
@@ -33,6 +35,9 @@ export default class Sintroduce {
 
     this.theme.initialize(document.body, document.getElementById("sintroduce-container"));
 
+    this.navigator = new Navigator(this.theme.getViewport(), this.theme.getMapper());
+    this.navigator.jumpToStart();
+
     this.isReady = true;
   }
 
@@ -41,7 +46,7 @@ export default class Sintroduce {
   }
 
   public getPosition(): number[] {
-    return this.theme.getPosition();
+    return this.navigator.getPosition();
   }
 
   public getIsReady(): boolean {

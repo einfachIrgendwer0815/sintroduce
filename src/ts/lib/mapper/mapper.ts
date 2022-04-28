@@ -1,3 +1,6 @@
+import Instruction from '../instruction';
+import Queue from '../queue';
+
 export default interface IMapper {
-  map: (parentElement: HTMLElement) => any,
+  generateNavigatorInstructions: (parentElement: HTMLElement) => Queue<Instruction>,
 }

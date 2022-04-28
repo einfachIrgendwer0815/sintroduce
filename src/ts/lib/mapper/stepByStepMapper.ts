@@ -1,15 +1,11 @@
 import IMapper from './mapper';
+import Instruction from '../instruction';
+import Queue from '../queue';
 
 export default class StepByStepMapper implements IMapper {
-  public map(parentElement: HTMLElement): Array<Array<Element>> {
-    var map: Array<Array<Element>> = new Array<Array<Element>>();
+  public generateNavigatorInstructions(parentElement: HTMLElement): Queue<Instruction> {
+    var instructions = new Queue<Instruction>();
 
-    for(var i:number = 0; i < parentElement.children.length; i++) {
-      var section: Array<Element> = Array.from(parentElement.children[i].getElementsByClassName("fragment"));
-
-      map.push(section);
-    }
-
-    return map;
+    return instructions;
   }
 }
