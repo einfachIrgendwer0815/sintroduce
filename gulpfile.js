@@ -76,4 +76,5 @@ gulp.task('js-es6', function (done) {
     });
 });
 
-gulp.task('build', gulp.parallel('scss', 'js-es5', 'js-es6'));
+gulp.task('js', gulp.parallel('js-es5', 'js-es6'))
+gulp.task('build', gulp.parallel('scss', 'js'));
