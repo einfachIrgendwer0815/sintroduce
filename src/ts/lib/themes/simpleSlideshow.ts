@@ -2,20 +2,27 @@ import ITheme from './theme';
 import StepByStepMapper from '../mapper/stepByStepMapper';
 
 export default class SimpleSlideshow implements ITheme {
-  private map: Array<Array<{ [key: string]: any }>>;
+  private map: Array<Array<Element>>;
   private position: number[];
 
   private viewport: HTMLElement;
 
+  public initialize(parentElement: HTMLElement, contentContainer: HTMLElement): void {
+    this.setupViewport(parentElement);
+    this.copyContent(contentContainer);
+
+    this.map = (new StepByStepMapper()).map(this.viewport);
+  }
+
   /* add viewport elements to the DOM */
-  public setupViewport(parentElement: HTMLElement): void {
+  private setupViewport(parentElement: HTMLElement): void {
     this.viewport = document.createElement('div');
     this.viewport.id = "sintroduce-viewport";
 
     parentElement.appendChild(this.viewport);
   }
 
-  public copyContent(contentContainer: HTMLElement): void {
+  private copyContent(contentContainer: HTMLElement): void {
     Array.from(contentContainer.children).forEach(element => {
       this.viewport.appendChild(element);
     });

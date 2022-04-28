@@ -31,14 +31,17 @@ export default class Sintroduce {
     /* create theme instance */
     this.theme = new ThemeClasses[this.options.presentationTheme]();
 
-    this.theme.setupViewport(document.body);
+    this.theme.initialize(document.body, document.getElementById("sintroduce-container"));
 
-    this.theme.copyContent(document.getElementById("sintroduce-container"));
     this.isReady = true;
   }
 
   private checkForContainer(): boolean {
     return document.getElementById("sintroduce-container") != undefined;
+  }
+
+  public getPosition(): number[] {
+    return this.theme.getPosition();
   }
 
   public getIsReady(): boolean {

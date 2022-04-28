@@ -10,18 +10,18 @@
   </head>
   <body>
     <div id="sintroduce-container" style="visibility: hidden;">
-      <section>
+      <section id="section1">
         <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span>
       </section>
-      <section>
-        <span class="fragment">These</span>
-        <span class="fragment">are</span>
-        <span class="fragment">some</span>
-        <span class="fragment">fragments.</span>
+      <section id="section2">
+        <span class="fragment" id="frag-001">These</span>
+        <span class="fragment" id="frag-002">are</span>
+        <span class="fragment" id="frag-003">some</span>
+        <span class="fragment" id="frag-004">fragments.</span>
       </section>
-      <section>
+      <section id="section3">
         <p>some fancy text</p>
-        <span class="fragment">And another fragment</span>
+        <span class="fragment" id="frag-005">And another fragment</span>
       </section>
     </div>
 
@@ -51,6 +51,21 @@
         content.forEach((item, i) => {
           assert.equal(item.parentElement, viewportElement, `sucessfully moved child at index ${i}`);
         });
+
+      QUnit.test('map', (assert) => {
+        assert.deepEqual(Sintroduce.theme.map, [
+          [],
+          [
+            document.getElementById("frag-001"),
+            document.getElementById("frag-002"),
+            document.getElementById("frag-003"),
+            document.getElementById("frag-004"),
+          ],
+          [
+            document.getElementById("frag-005"),
+          ]
+        ], 'mapping correct')
+      })
       });
     </script>
   </body>
