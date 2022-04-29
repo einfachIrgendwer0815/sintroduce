@@ -1,11 +1,12 @@
 import IMapper from './mapper/mapper';
 import Queue from './queue';
+import Stack from './stack';
 import Instruction from './instruction';
 
 export default class Navigator {
   private past: Queue<Instruction>;
   private future: Queue<Instruction>;
-  private present: HTMLElement | Element;
+  private present: Stack<HTMLElement>;
 
   private position: number[] = new Array<number>();
 

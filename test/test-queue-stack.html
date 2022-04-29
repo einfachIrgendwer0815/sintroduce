@@ -58,6 +58,36 @@
         queue.reverseRemove();
         assert.deepEqual(queue.toArray(), [1,2]);
       });
+
+      QUnit.module("Stack");
+
+      QUnit.test("push", (assert) => {
+        var stack = new Sintroduce.Stack();
+
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        assert.deepEqual(stack.toArray(), [1,2,3]);
+
+        stack.push(4);
+        assert.deepEqual(stack.toArray(), [1,2,3,4]);
+      });
+
+      QUnit.test("pop", (assert) => {
+        var stack = new Sintroduce.Stack([1,2,3,4,5]);
+
+        assert.deepEqual(stack.toArray(), [1,2,3,4,5]);
+
+        stack.pop();
+        stack.pop();
+
+        assert.deepEqual(stack.toArray(), [1,2,3]);
+
+        stack.pop();
+
+        assert.deepEqual(stack.toArray(), [1,2]);
+      });
     </script>
   </body>
 </html>
