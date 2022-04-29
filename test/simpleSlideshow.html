@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
 
-    <script src="../dist/sintroduce.js" charset="utf-8"></script>
+    <script src="../dist/sintroduce.dev.js" charset="utf-8"></script>
   </head>
   <body>
     <div id="sintroduce-container" style="visibility: hidden;">
@@ -34,7 +34,7 @@
 
       var content = Array.from(document.getElementById("sintroduce-container").children);
 
-      Sintroduce.initialize({
+      Sintroduce.Sintroduce.initialize({
         presentationTheme: "SimpleSlideshow",
         autoStart: false,
       });
@@ -53,7 +53,7 @@
         });
 
       QUnit.test.skip('map', (assert) => {
-        assert.deepEqual(Sintroduce.theme.map, [
+        assert.deepEqual(Sintroduce.Sintroduce.theme.map, [
           [],
           [
             document.getElementById("frag-001"),

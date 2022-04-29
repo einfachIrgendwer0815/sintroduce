@@ -5,6 +5,11 @@ import IMapper from '../mapper/mapper';
 
 export default class SimpleSlideshow implements ITheme {
   private viewport: HTMLElement;
+  private mapper: IMapper;
+
+  constructor(private names: { [key: string]: string }) {
+    this.mapper = new StepByStepMapper(this.names);
+  }
 
   public initialize(parentElement: HTMLElement, contentContainer: HTMLElement): void {
     this.setupViewport(parentElement);
@@ -14,7 +19,7 @@ export default class SimpleSlideshow implements ITheme {
   /* add viewport elements to the DOM */
   private setupViewport(parentElement: HTMLElement): void {
     this.viewport = document.createElement('div');
-    this.viewport.id = "sintroduce-viewport";
+    this.viewport.id = this.names.viewport;
 
     parentElement.appendChild(this.viewport);
   }
@@ -32,6 +37,6 @@ export default class SimpleSlideshow implements ITheme {
   }
 
   public getMapper(): IMapper {
-    return new StepByStepMapper();
+    return this.mapper;
   }
 }

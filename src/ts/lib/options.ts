@@ -10,6 +10,7 @@ export interface Options {
   generalPrefix: string;
 
   viewportId: string;
+  containerName: string;
 
   pastClass: string;
   presentClass: string;
@@ -32,6 +33,7 @@ export const DefaultOptions: Options = {
   generalPrefix: "sintroduce",
 
   viewportId: "viewport",
+  containerName: "container",
 
   pastClass: "past",
   presentClass: "present",

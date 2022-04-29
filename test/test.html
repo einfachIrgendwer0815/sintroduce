@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="../node_modules/qunit/qunit/qunit.css">
 
-    <script src="../dist/sintroduce.js" charset="utf-8"></script>
+    <script src="../dist/sintroduce.dev.js" charset="utf-8"></script>
   </head>
   <body>
     <div id="qunit"></div>
@@ -17,9 +17,9 @@
     <script type="text/javascript">
         QUnit.module('Overall test', () => {
           QUnit.test('PreInitState', (assert) => {
-            assert.equal(Sintroduce.getIsReady(), false);
-            assert.equal(Sintroduce.getHasStarted(), false);
-            assert.equal(Sintroduce.getPaused(), false);
+            assert.equal(Sintroduce.Sintroduce.getIsReady(), false);
+            assert.equal(Sintroduce.Sintroduce.getHasStarted(), false);
+            assert.equal(Sintroduce.Sintroduce.getPaused(), false);
           });
 
           var options = {
@@ -27,9 +27,9 @@
           };
 
           QUnit.test('InitOptions', (assert) => {
-            Sintroduce.initialize(options);
+            Sintroduce.Sintroduce.initialize(options);
 
-            assert.equal(Sintroduce.getOption("autoStart"), false);
+            assert.equal(Sintroduce.Sintroduce.getOption("autoStart"), false);
           })
         });
     </script>

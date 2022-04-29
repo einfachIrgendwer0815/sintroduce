@@ -13,6 +13,7 @@ export default class Sintroduce {
   private paused: boolean = false;
 
   private options: Options;
+  private names: { [key: string]: string } = {};
 
   private theme: ITheme;
   private navigator: Navigator;
@@ -21,6 +22,7 @@ export default class Sintroduce {
 
   public initialize(options: { [key: string]: any }): void {
     this.options = processOptions(options);
+    this.generateNames();
 
     if (!this.checkForContainer()) return;
 
@@ -31,9 +33,9 @@ export default class Sintroduce {
     }
 
     /* create theme instance */
-    this.theme = new ThemeClasses[this.options.presentationTheme]();
+    this.theme = new ThemeClasses[this.options.presentationTheme](this.names);
 
-    this.theme.initialize(document.body, document.getElementById("sintroduce-container"));
+    this.theme.initialize(document.body, document.getElementById(this.names.container));
 
     this.navigator = new Navigator(this.theme.getViewport(), this.theme.getMapper());
     this.navigator.jumpToStart();
@@ -41,8 +43,13 @@ export default class Sintroduce {
     this.isReady = true;
   }
 
+  private generateNames(): void {
+    this.names.viewport = this.options.generalPrefix.concat("-", this.options.viewportId);
+    this.names.container = this.options.generalPrefix.concat("-", this.options.containerName);
+  }
+
   private checkForContainer(): boolean {
-    return document.getElementById("sintroduce-container") != undefined;
+    return document.getElementById(this.names.container) != undefined;
   }
 
   public getPosition(): number[] {

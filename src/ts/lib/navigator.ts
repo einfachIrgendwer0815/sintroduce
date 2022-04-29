@@ -10,11 +10,7 @@ export default class Navigator {
 
   private position: number[] = new Array<number>();
 
-  private viewport: HTMLElement;
-
-  constructor(viewport: HTMLElement, mapper: IMapper) {
-    this.viewport = viewport;
-
+  constructor(private viewport: HTMLElement, mapper: IMapper) {
     this.future = mapper.generateNavigatorInstructions(viewport);
   }
 
