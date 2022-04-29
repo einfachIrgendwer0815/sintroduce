@@ -14,6 +14,7 @@ export default class Queue<T> {
   }
 
   public remove(): void {
+    if(this.elements.length == 0) return;
     this.elements.splice(0,1);
   }
 
@@ -22,6 +23,7 @@ export default class Queue<T> {
   }
 
   public reverseRemove(): void {
+    if(this.elements.length == 0) return;
     this.elements.pop();
   }
 }
