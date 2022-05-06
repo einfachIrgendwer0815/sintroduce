@@ -1,7 +1,7 @@
 import IMapper from './mapper/mapper';
 import Queue from './queue';
 import Stack from './stack';
-import Instruction from './instruction';
+import { Instruction } from './instruction';
 
 export default class Navigator {
   private past: Queue<Instruction>;
@@ -11,7 +11,8 @@ export default class Navigator {
   private position: number[] = new Array<number>();
 
   constructor(private viewport: HTMLElement, mapper: IMapper) {
-    this.future = mapper.generateNavigatorInstructions(viewport);
+    mapper.feedData(viewport);
+    this.future = mapper.getNavigatorInstructions();
   }
 
   public jumpToStart(): void {

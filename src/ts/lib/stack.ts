@@ -21,4 +21,8 @@ export default class Stack<T> {
   public toArray(): Array<T> {
     return [...this.elements];
   }
+
+  public clear(): void {
+    this.elements = new Array<T>();
+  }
 }

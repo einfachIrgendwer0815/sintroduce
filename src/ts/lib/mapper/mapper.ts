@@ -1,6 +1,8 @@
-import Instruction from '../instruction';
+import { Instruction } from '../instruction';
 import Queue from '../queue';
 
 export default interface IMapper {
-  generateNavigatorInstructions: (parentElement: HTMLElement) => Queue<Instruction>,
+  feedData: (parentElement: HTMLElement) => void,
+  getListOfTimeStatedObjects: () => Element[],
+  getNavigatorInstructions: () => Queue<Instruction>,
 }

@@ -26,4 +26,8 @@ export default class Queue<T> {
     if(this.elements.length == 0) return;
     this.elements.pop();
   }
+
+  public clear(): void {
+    this.elements = new Array<T>();
+  }
 }
