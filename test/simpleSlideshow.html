@@ -51,21 +51,18 @@
         content.forEach((item, i) => {
           assert.equal(item.parentElement, viewportElement, `sucessfully moved child at index ${i}`);
         });
+      });
 
-      QUnit.test.skip('map', (assert) => {
-        assert.deepEqual(Sintroduce.Sintroduce.theme.map, [
-          [],
-          [
-            document.getElementById("frag-001"),
-            document.getElementById("frag-002"),
-            document.getElementById("frag-003"),
-            document.getElementById("frag-004"),
-          ],
-          [
-            document.getElementById("frag-005"),
-          ]
-        ], 'mapping correct')
-      })
+      QUnit.test('map', (assert) => {
+        var testElement = new Sintroduce.Queue([
+          new Sintroduce.SetPresent(document.getElementById("section1")),
+          new Sintroduce.SetPresent(document.getElementById("frag-001")),
+          new Sintroduce.SetPresent(document.getElementById("frag-002")),
+          new Sintroduce.SetPresent(document.getElementById("frag-003")),
+          new Sintroduce.SetPresent(document.getElementById("frag-004")),
+          new Sintroduce.SetPresent(document.getElementById("frag-005")),
+        ]);
+        assert.deepEqual(Sintroduce.Sintroduce.theme.mapper.getNavigatorInstructions(), testElement, 'mapping correct');
       });
     </script>
   </body>
