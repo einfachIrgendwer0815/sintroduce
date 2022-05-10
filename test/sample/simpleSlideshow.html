@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>General Test</title>
+
+    <script src="../../dist/sintroduce.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../dist/css/sintroduce.css" />
+    <link rel="stylesheet" href="../../dist/css/theme_simpleSlideshow.css" />
+  </head>
+  <body>
+    <div id="sintroduce-container">
+      <section id="section1">
+        <h1>First Section</h1>
+      </section>
+      <section id="section2">
+        <span class="fragment" id="frag-001">These</span>
+        <span class="fragment" id="frag-002">are</span>
+        <span class="fragment" id="frag-003">some</span>
+        <span class="fragment" id="frag-004">fragments.</span>
+      </section>
+      <section id="section3">
+        <p>some fancy text</p>
+        <span class="fragment" id="frag-005">And another fragment</span>
+      </section>
+    </div>
+
+    <script type="text/javascript">
+      Sintroduce.initialize();
+    </script>
+  </body>
+</html>
