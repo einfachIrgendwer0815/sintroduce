@@ -3,7 +3,7 @@ import { Instruction, SetPresent } from '../instruction';
 import Queue from '../queue';
 
 export default class StepByStepMapper implements IMapper {
-  private timedStatedElements: Element[];
+  private timeStatedElements: Element[] = [];
   private instructions: Queue<Instruction> = new Queue<Instruction>();
 
   constructor(private names: { [key: string]: string }) { }
@@ -23,13 +23,17 @@ export default class StepByStepMapper implements IMapper {
       } else {
         for(var j: number = 0; j < frags.length; j++) {
           this.instructions.append(new SetPresent(frags[j]));
+
+          this.timeStatedElements.push(frags[j]);
         }
       }
+
+      this.timeStatedElements.push(el);
     }
   }
 
   public getListOfTimeStatedObjects(): Element[] {
-    return this.timedStatedElements;
+    return this.timeStatedElements;
   }
 
   public getNavigatorInstructions(): Queue<Instruction> {

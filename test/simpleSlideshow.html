@@ -63,6 +63,19 @@
           new Sintroduce.SetPresent(document.getElementById("frag-005")),
         ]);
         assert.deepEqual(Sintroduce.Sintroduce.theme.mapper.getNavigatorInstructions(), testElement, 'mapping correct');
+
+        var timeStatedElements = [
+          document.getElementById("section1"),
+          document.getElementById("frag-001"),
+          document.getElementById("frag-002"),
+          document.getElementById("frag-003"),
+          document.getElementById("frag-004"),
+          document.getElementById("section2"),
+          document.getElementById("frag-005"),
+          document.getElementById("section3"),
+        ];
+
+        assert.deepEqual(Sintroduce.Sintroduce.theme.mapper.getListOfTimeStatedObjects(), timeStatedElements, 'all items listed');
       });
     </script>
   </body>
