@@ -18,14 +18,11 @@ export default class StepByStepMapper implements IMapper {
 
       var frags: HTMLCollectionOf<Element> = el.getElementsByClassName("fragment");
 
-      if(frags.length == 0) {
-        this.instructions.append(new SetPresent(el))
-      } else {
-        for(var j: number = 0; j < frags.length; j++) {
-          this.instructions.append(new SetPresent(frags[j]));
+      this.instructions.append(new SetPresent(el))
+      for(var j: number = 0; j < frags.length; j++) {
+        this.instructions.append(new SetPresent(frags[j]));
 
-          this.timeStatedElements.push(frags[j]);
-        }
+        this.timeStatedElements.push(frags[j]);
       }
 
       this.timeStatedElements.push(el);
