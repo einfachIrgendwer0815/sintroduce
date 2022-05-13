@@ -29,4 +29,8 @@ export default class Stack<T> {
   public copy(): Stack<T> {
     return new Stack<T>([...this.elements]);
   }
+
+  public length(): number {
+    return this.elements.length;
+  }
 }

@@ -34,4 +34,8 @@ export default class Queue<T> {
   public copy(): Queue<T> {
     return new Queue<T>([...this.elements]);
   }
+
+  public length(): number {
+    return this.elements.length;
+  }
 }
