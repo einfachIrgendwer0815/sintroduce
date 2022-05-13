@@ -13,18 +13,18 @@ export default class Queue<T> {
     this.elements.push(element);
   }
 
-  public remove(): void {
+  public remove(): T {
     if(this.elements.length == 0) return;
-    this.elements.splice(0,1);
+    return this.elements.splice(0,1)[0];
   }
 
   public reverseAppend(element: T): void {
     this.elements = [element].concat(this.elements);
   }
 
-  public reverseRemove(): void {
+  public reverseRemove(): T {
     if(this.elements.length == 0) return;
-    this.elements.pop();
+    return this.elements.pop();
   }
 
   public clear(): void {
