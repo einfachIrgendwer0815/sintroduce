@@ -10,9 +10,19 @@ export default class Navigator {
 
   private position: number[] = new Array<number>();
 
-  constructor(private viewport: HTMLElement, mapper: IMapper) {
-    mapper.feedData(viewport);
-    this.future = mapper.getNavigatorInstructions();
+  constructor(private viewport: HTMLElement, private mapper: IMapper) {
+    this.mapper.feedData(viewport);
+    this.future = this.mapper.getNavigatorInstructions();
+
+    this.setInitialClasses();
+  }
+
+  private setInitialClasses(): void {
+    var elements: Element[] = this.mapper.getListOfTimeStatedObjects();
+
+    for(var i: number = 0; i < elements.length; i++) {
+      elements[i].classList.add("future");
+    }
   }
 
   public jumpToStart(): void {
