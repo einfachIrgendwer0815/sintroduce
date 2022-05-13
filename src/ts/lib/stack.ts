@@ -25,4 +25,8 @@ export default class Stack<T> {
   public clear(): void {
     this.elements = new Array<T>();
   }
+
+  public copy(): Stack<T> {
+    return new Stack<T>([...this.elements]);
+  }
 }

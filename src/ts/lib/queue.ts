@@ -30,4 +30,8 @@ export default class Queue<T> {
   public clear(): void {
     this.elements = new Array<T>();
   }
+
+  public copy(): Queue<T> {
+    return new Queue<T>([...this.elements]);
+  }
 }

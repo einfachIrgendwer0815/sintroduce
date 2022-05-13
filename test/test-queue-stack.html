@@ -73,6 +73,16 @@
         assert.deepEqual(queue.toArray(), []);
       });
 
+      QUnit.test("copy", (assert) => {
+        var queue = new Sintroduce.Queue([1,2,3,4]);
+
+        var queue2 = queue.copy();
+
+        queue.remove();
+
+        assert.deepEqual(queue2.toArray(), [1,2,3,4]);
+      })
+
       QUnit.module("Stack");
 
       QUnit.test("push", (assert) => {
@@ -112,6 +122,15 @@
 
         assert.deepEqual(stack.toArray(), []);
       });
+
+      QUnit.test("copy", (assert) => {
+        var stack = new Sintroduce.Stack([1,2,3,4]);
+        var stack2 = stack.copy();
+
+        stack.pop();
+
+        assert.deepEqual(stack2.toArray(), [1,2,3,4]);
+      })
     </script>
   </body>
 </html>
