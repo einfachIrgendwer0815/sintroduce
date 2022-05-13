@@ -1,7 +1,7 @@
 export default class Stack<T> {
   private elements: Array<T>;
 
-  constructor(elements: Array<T>) {
+  constructor(elements?: Array<T>) {
     this.elements = elements !== undefined ? elements : new Array<T>();
   }
 
