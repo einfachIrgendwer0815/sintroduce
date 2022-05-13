@@ -30,10 +30,10 @@ export default class StepByStepMapper implements IMapper {
   }
 
   public getListOfTimeStatedObjects(): Element[] {
-    return this.timeStatedElements;
+    return [...this.timeStatedElements];
   }
 
   public getNavigatorInstructions(): Queue<Instruction> {
-    return this.instructions;
+    return this.instructions.copy();
   }
 }

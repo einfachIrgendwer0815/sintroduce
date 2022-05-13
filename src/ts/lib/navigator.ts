@@ -6,13 +6,15 @@ import { Instruction } from './instruction';
 export default class Navigator {
   private past: Queue<Instruction>;
   private future: Queue<Instruction>;
-  private present: Stack<HTMLElement>;
+  private present: Stack<HTMLElement|Element>;
 
   private position: number[] = new Array<number>();
 
   constructor(private viewport: HTMLElement, private mapper: IMapper) {
     this.mapper.feedData(viewport);
     this.future = this.mapper.getNavigatorInstructions();
+    this.past = new Queue<Instruction>();
+    this.present = new Stack<HTMLElement|Element>();
 
     this.setInitialClasses();
   }
@@ -25,8 +27,29 @@ export default class Navigator {
     }
   }
 
-  public jumpToStart(): void {
+  private performInstr(instr: Instruction): void {
+    switch (instr.action) {
+      case 'present':
+        instr.data.element.classList.remove("future");
+        instr.data.element.classList.add("present");
+      break;
+    }
+  }
 
+  private performReverseInstr(instr: Instruction): void {
+    switch (instr.action) {
+      case 'present':
+        instr.data.element.classList.remove("present");
+        instr.data.element.classList.add("future");
+    }
+  }
+
+  public jumpToStart(): void {
+    var instr = this.future.remove();
+
+    this.performInstr(instr);
+
+    this.past.append(instr);
   }
 
   public getPosition(): number[] {
