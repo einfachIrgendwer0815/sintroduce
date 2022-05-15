@@ -54,17 +54,24 @@
       });
 
       QUnit.test('map', (assert) => {
-        var testElement = new Sintroduce.Queue([
-          new Sintroduce.SetPresent(document.getElementById("section1")),
-          new Sintroduce.SetPresent(document.getElementById("section2")),
-          new Sintroduce.SetPresent(document.getElementById("frag-001")),
-          new Sintroduce.SetPresent(document.getElementById("frag-002")),
-          new Sintroduce.SetPresent(document.getElementById("frag-003")),
-          new Sintroduce.SetPresent(document.getElementById("frag-004")),
-          new Sintroduce.SetPresent(document.getElementById("section3")),
-          new Sintroduce.SetPresent(document.getElementById("frag-005")),
-        ]);
-        assert.deepEqual(Sintroduce.Sintroduce.theme.mapper.getNavigatorInstructions(), testElement, 'mapping correct');
+        var testElement = [
+          {
+            id: 0,
+            name: "",
+            instructions: new Sintroduce.Queue([
+              new Sintroduce.SetPresent(document.getElementById("section1")),
+              new Sintroduce.SetPresent(document.getElementById("section2")),
+              new Sintroduce.SetPresent(document.getElementById("frag-001")),
+              new Sintroduce.SetPresent(document.getElementById("frag-002")),
+              new Sintroduce.SetPresent(document.getElementById("frag-003")),
+              new Sintroduce.SetPresent(document.getElementById("frag-004")),
+              new Sintroduce.SetPresent(document.getElementById("section3")),
+              new Sintroduce.SetPresent(document.getElementById("frag-005")),
+            ])
+          }
+        ];
+
+        assert.deepEqual(Sintroduce.Sintroduce.theme.mapper.getNavigationPackages(), testElement, 'mapping correct');
 
         var timeStatedElements = [
           document.getElementById("section1"),
