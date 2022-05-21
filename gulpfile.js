@@ -1,6 +1,4 @@
 const gulp = require('gulp');
-const yargs = require('yargs');
-const argv = yargs.argv;
 
 const sass = require('gulp-sass')(require('sass'));
 
@@ -36,18 +34,22 @@ gulp.task('scss', function (done) {
 	done();
 });
 
-gulp.task('js-es5', function (done) {
+var cache = {};
+
+function js_es5(dev = false) {
 	return rollup
     .rollup({
-      input: argv.dev ? tsDevSource: tsSource,
+      input: dev ? tsDevSource: tsSource,
+			cache: cache.umd,
       plugins: [
 				rollupTypescript({ compilerOptions: { target: 'es5' }}),
 				stripBanner(),
 			]
     })
     .then(bundle => {
+			cache.umd = bundle.cache;
       return bundle.write({
-        file: argv.dev ? jsDest["js-es5-dev"]: jsDest["js-es5"],
+        file: dev ? jsDest["js-es5-dev"]: jsDest["js-es5"],
         format: 'umd',
         name: bundleName,
 				plugins: [
@@ -55,22 +57,32 @@ gulp.task('js-es5', function (done) {
 				],
         sourcemap: true,
 				banner: banner
-      });
+    	});
     });
+}
+
+gulp.task('js-es5', function (done) {
+	return js_es5(false);
 });
 
-gulp.task('js-es6', function (done) {
+gulp.task('js-es5-dev', function (done) {
+	return js_es5(true);
+});
+
+function js_es6(dev = false) {
 	return rollup
     .rollup({
-      input: argv.dev ? tsDevSource: tsSource,
+      input: dev ? tsDevSource: tsSource,
+			cache: cache.esm,
       plugins: [
 				stripBanner(),
 				rollupTypescript({ compilerOptions: { target: 'es6' }})
 			]
     })
     .then(bundle => {
+			cache.esm = bundle.cache;
       return bundle.write({
-        file: argv.dev ? jsDest["js-es6-dev"]: jsDest["js-es6"],
+        file: dev ? jsDest["js-es6-dev"]: jsDest["js-es6"],
         format: 'es',
         name: bundleName,
 				plugins: [
@@ -80,7 +92,21 @@ gulp.task('js-es6', function (done) {
 				banner: banner
       });
     });
+}
+
+gulp.task('js-es6', function (done) {
+	return js_es6(false);
 });
 
-gulp.task('js', gulp.parallel('js-es5', 'js-es6'))
+gulp.task('js-es6-dev', function (done) {
+	return js_es6(true);
+});
+
+gulp.task('serve', function (done) {
+	gulp.watch(['src/**/*'], gulp.parallel('js-dev', 'scss'));
+});
+
+gulp.task('js', gulp.parallel('js-es5', 'js-es6'));
+gulp.task('js-dev', gulp.parallel('js-es5-dev', 'js-es6-dev'));
 gulp.task('build', gulp.parallel('scss', 'js'));
+gulp.task('fullbuild', gulp.parallel('scss', 'js', 'js-dev'));
