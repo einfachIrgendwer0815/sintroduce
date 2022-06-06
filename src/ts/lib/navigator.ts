@@ -3,6 +3,7 @@ import Queue from './queue';
 import Stack from './stack';
 import { Instruction } from './instruction';
 import InstructionPackage from './instruction_package';
+import { performInstr } from './instruction_executor';
 
 export default class Navigator {
   private past: Queue<Instruction>;
@@ -45,27 +46,10 @@ export default class Navigator {
     this.present = new Stack<HTMLElement|Element>();
   }
 
-  private performInstr(instr: Instruction): void {
-    switch (instr.action) {
-      case 'present':
-        instr.data.element.classList.remove("future");
-        instr.data.element.classList.add("present");
-      break;
-    }
-  }
-
-  private performReverseInstr(instr: Instruction): void {
-    switch (instr.action) {
-      case 'present':
-        instr.data.element.classList.remove("present");
-        instr.data.element.classList.add("future");
-    }
-  }
-
   public jumpToStart(): void {
     var instr = this.future.remove();
 
-    this.performInstr(instr);
+    performInstr(instr);
 
     this.past.append(instr);
   }
