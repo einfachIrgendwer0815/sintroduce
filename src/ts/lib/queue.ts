@@ -35,6 +35,12 @@ export default class Queue<T> {
     return new Queue<T>([...this.elements]);
   }
 
+  public peek(): T {
+    if(this.elements.length == 0) return;
+
+    return this.elements[0];
+  }
+
   public length(): number {
     return this.elements.length;
   }

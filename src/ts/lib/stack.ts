@@ -12,10 +12,16 @@ export default class Stack<T> {
   public pop(): T {
     if(this.elements.length == 0) return undefined;
 
-    var element: T = this.elements[-1];
+    var element: T = this.elements.at(-1);
     this.elements.pop();
 
     return element;
+  }
+
+  public peek(): T {
+    if(this.elements.length == 0) return undefined;
+
+    return this.elements.at(-1);
   }
 
   public toArray(): Array<T> {
