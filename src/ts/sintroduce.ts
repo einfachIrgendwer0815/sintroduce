@@ -37,8 +37,8 @@ export default class Sintroduce {
 
     this.theme.initialize(document.body, document.getElementById(this.names.container));
 
-    this.navigator = new Navigator(this.theme.getViewport(), this.theme.getMapper());
-    this.navigator.jumpToStart();
+    this.navigator = new Navigator(this.theme.getViewport(), this.theme.getMapper(), this.names);
+    this.navigator.next();
 
     this.isReady = true;
   }

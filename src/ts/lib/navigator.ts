@@ -6,14 +6,14 @@ import InstructionPackage from './instruction_package';
 import { performInstr } from './instruction_executor';
 
 export default class Navigator {
-  private past: Queue<Instruction>;
+  private past: Stack<Instruction>;
   private future: Queue<Instruction>;
   private present: Stack<HTMLElement|Element>;
 
   private packages: InstructionPackage[];
   private position: number[] = new Array<number>();
 
-  constructor(private viewport: HTMLElement, private mapper: IMapper) {
+  constructor(private viewport: HTMLElement, private mapper: IMapper, private names: { [id: string]: string }) {
     this.mapper.feedData(viewport);
 
     this.packages = this.mapper.getNavigationPackages();
@@ -27,6 +27,7 @@ export default class Navigator {
 
     for(var i: number = 0; i < elements.length; i++) {
       elements[i].classList.add("future");
+      elements[i].setAttribute("time-stated", "1");
     }
   }
 
@@ -42,16 +43,24 @@ export default class Navigator {
     if(instr_package == undefined) return;
 
     this.future = instr_package.instructions;
-    this.past = new Queue<Instruction>();
+    this.past = new Stack<Instruction>();
     this.present = new Stack<HTMLElement|Element>();
   }
 
-  public jumpToStart(): void {
+  public next(): void {
     var instr = this.future.remove();
+    if(instr == undefined) return;
 
-    performInstr(instr);
+    performInstr(instr, this.present, this.names);
+    this.past.push(instr);
+  }
 
-    this.past.append(instr);
+  public back(): void {
+    var instr = this.past.pop();
+    if(instr == undefined) return;
+
+    performInstr(instr, this.present, this.names, 'reverse');
+    this.future.reverseAppend(instr);
   }
 
   public getPosition(): number[] {
