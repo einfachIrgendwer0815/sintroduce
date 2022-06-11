@@ -28,6 +28,10 @@ export default class Stack<T> {
     return [...this.elements];
   }
 
+  public includes(element: T): boolean {
+    return this.elements.includes(element);
+  }
+
   public clear(): void {
     this.elements = new Array<T>();
   }

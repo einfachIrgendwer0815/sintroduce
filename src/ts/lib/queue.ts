@@ -9,6 +9,10 @@ export default class Queue<T> {
     return [...this.elements];
   }
 
+  public includes(element: T): boolean {
+    return this.elements.includes(element);
+  }
+
   public append(element: T): void {
     this.elements.push(element);
   }
