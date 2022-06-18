@@ -1,17 +1,14 @@
 import { Instruction } from './instruction';
 import Stack from './stack';
 
-const INSTRUCTION_EXECUTORS: { [id: string]: { [id: string]: (instr: Instruction, stack: Stack<HTMLElement|Element>, names: { [id: string]: string }) => void } } = {
-  'present': {
-    'normal': present,
-    'reverse': presentReverse
-  },
+const INSTRUCTION_EXECUTORS: { [id: string]: (instr: Instruction, stack: Stack<HTMLElement|Element>, names: { [id: string]: string }) => void } = {
+  'present': present
 };
 
-function performInstr(instr: Instruction, stack: Stack<HTMLElement|Element>, names: { [id: string]: string }, direction: 'normal' | 'reverse' = 'normal'): void {
+function performInstr(instr: Instruction, stack: Stack<HTMLElement|Element>, names: { [id: string]: string }): void {
   if(INSTRUCTION_EXECUTORS[instr.action] == undefined) return;
 
-  INSTRUCTION_EXECUTORS[instr.action][direction](instr, stack, names);
+  INSTRUCTION_EXECUTORS[instr.action](instr, stack, names);
 }
 
 function present(instr: Instruction, stack: Stack<HTMLElement|Element>, names: { [id: string]: string }): void {
@@ -32,9 +29,6 @@ function present(instr: Instruction, stack: Stack<HTMLElement|Element>, names: {
   }
   _setPresent(instr.data.element);
   stack.push(instr.data.element);
-}
-
-function presentReverse(instr: Instruction, stack: Stack<HTMLElement|Element>, names: { [id: string]: string }): void {
 }
 
 function _getParentElements(element: HTMLElement|Element, names: { [id: string]: string }): Array<HTMLElement|Element> {

@@ -10,6 +10,8 @@ export default class Navigator {
   private future: Queue<Instruction>;
   private present: Stack<HTMLElement|Element>;
 
+  private pastStacks: Stack<Stack<HTMLElement|Element>>;
+
   private packages: InstructionPackage[];
   private position: number[] = new Array<number>();
 
@@ -45,22 +47,20 @@ export default class Navigator {
     this.future = instr_package.instructions;
     this.past = new Stack<Instruction>();
     this.present = new Stack<HTMLElement|Element>();
+    this.pastStacks = new Stack<Stack<HTMLElement|Element>>();
   }
 
   public next(): void {
     var instr = this.future.remove();
     if(instr == undefined) return;
 
+    this.pastStacks.push(this.present.copy());
+
     performInstr(instr, this.present, this.names);
     this.past.push(instr);
   }
 
   public back(): void {
-    var instr = this.past.pop();
-    if(instr == undefined) return;
-
-    performInstr(instr, this.present, this.names, 'reverse');
-    this.future.reverseAppend(instr);
   }
 
   public getPosition(): number[] {
